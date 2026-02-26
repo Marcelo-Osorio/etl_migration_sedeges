@@ -1,16 +1,13 @@
 import pandas as pd
 
 DEFAULT_MAX_WIDTH = 25  # límite general para columnas
-DESCRIPCION_WIDTH = 70  # ancho especial para DESCRIPCION
 DEFAULT_ROW_HEIGHT = 22  # alto de fila para wrap
 
 
 def export_book_to_excel(
     dfs_by_sheet: dict[str, pd.DataFrame],
     output_path: str = "salida_limpia_formateada.xlsx",
-    descripcion_col: str = "DESCRIPCION",
     max_width: int = DEFAULT_MAX_WIDTH,
-    descripcion_width: int = DESCRIPCION_WIDTH,
 ):
     """
     Exporta un diccionario {nombre_hoja: DataFrame} a un Excel con formato.
@@ -64,15 +61,13 @@ def export_book_to_excel(
 
             # ajustar ancho con límite
             for col_idx, col_name in enumerate(df.columns):
-                if col_name == descripcion_col:
-                    width = descripcion_width
-                else:
-                    # calculo ancho pero con límite
-                    series_as_str = df[col_name].astype(str).fillna("")
-                    max_len = max(
-                        [len(str(col_name))] + series_as_str.map(len).tolist()
-                    )
-                    width = min(max_len + 2, max_width)
+                
+                # calculo ancho pero con límite
+                series_as_str = df[col_name].astype(str).fillna("")
+                max_len = max(
+                    [len(str(col_name))] + series_as_str.map(len).tolist()
+                )
+                width = min(max_len + 2, max_width)
 
                 worksheet.set_column(col_idx, col_idx, width, cell_fmt)
 
@@ -95,7 +90,6 @@ def export_book_to_excel(
                     },
                 )
 
-    # print(f"Excel generado: {output_path}"    # exportar TODO a un nuevo excel
     # export_book_to_excel(
     #     dfs_limpios,
     #     output_path="salida_limpia_formateada.xlsx",

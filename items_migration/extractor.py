@@ -98,6 +98,5 @@ def extract_items_from_detalle(dfs_limpios: dict) -> pd.DataFrame:
     df_total.reset_index(drop=True, inplace=True)
 
     print(f"[extractor] Total ítems extraídos de hojas detalle: {len(df_total)}")
-    for nombre_hoja, df in df_total:
-        print(df[nombre_hoja].head())
+
     return df_total

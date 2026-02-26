@@ -1,0 +1,49 @@
+{
+    "detalles": {
+        "ANEXO-1A": {
+            "almacen_id": 12
+        },
+        "PCVH MUJER": {
+            "almacen_id": 13
+        },
+        "PAIPI": {
+            "almacen_id": 9
+        },
+        "CEPAT": {
+            "almacen_id": 14
+        },
+        "PDP MUJERES IDH": {
+            "almacen_id": 11
+        },
+        "PAAMCTI PROVINCIAL": {
+            "almacen_id": 15
+        },
+        "PPAER PENAL": {
+            "almacen_id": 16
+        },
+        "POAR PENAL": {
+            "almacen_id": 17
+        },
+        "PMA NIÑNIÑO ADOL": {
+            "almacen_id": 18
+        },
+        "PCEMTRATA Y TRAFICO": {
+            "almacen_id": 19
+        },
+        "BECAS": {
+            "almacen_id": 20
+        },
+        "REFRIGERIOS": {
+            "almacen_id": 21
+        },
+        "VIVERES FRESCOS": {
+            "almacen_id": 22
+        },
+        "FONDOS EN AVANCE": {
+            "almacen_id": 23
+        },
+        "FARMACIA": {
+            "almacen_id": 2
+        }
+    }
+}
