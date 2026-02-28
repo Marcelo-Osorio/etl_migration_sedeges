@@ -8,6 +8,7 @@ Ejecuta en orden:
   2. ingresos       → output/ingresos.sql
   3. ingreso_detalles → output/ingreso_detalles.sql
                         (+ renames columna producto_id → item_id en DB)
+  4. egresos        → output/egresos.sql
 
 Uso:
     python main.py
@@ -19,6 +20,7 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 
 import run_catalogo_items
+import run_egresos
 import run_ingresos
 import run_ingreso_detalles
 
@@ -52,11 +54,15 @@ def main():
     engine = _get_engine()
     run_ingreso_detalles.run(dfs_limpios, engine)
 
+    # 4. egresos (requiere ingreso_detalles con id > 7 en la DB)
+    run_egresos.run(dfs_limpios, engine)
+
     print("\n" + "=" * 60)
     print("Pipeline completa. Archivos generados en output/:")
     print("  - catalogo_items.sql")
     print("  - ingresos.sql")
     print("  - ingreso_detalles.sql")
+    print("  - egresos.sql")
     print("=" * 60)
 
 
