@@ -45,5 +45,10 @@
         "FARMACIA": {
             "almacen_id": 2
         }
+    },
+    "contables" : {
+        "DONACIONES": {
+            "almacen_id": 25
+        }
     }
 }

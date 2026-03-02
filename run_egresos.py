@@ -75,7 +75,7 @@ def run(dfs_limpios: dict, engine=None):
 if __name__ == "__main__":
     # Si se ejecuta este archivo directamente:
     # 1) Cargamos y limpiamos el Excel una sola vez
-    from run_catalogo_items import load_dfs_limpios
+    from excel_loader import load_dfs_limpios
 
     dfs = load_dfs_limpios()
     # 2) Ejecutamos la migración de egresos usando esa información

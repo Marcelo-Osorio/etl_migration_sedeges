@@ -71,7 +71,7 @@ def run(dfs_limpios: dict, engine=None):
 
 
 if __name__ == "__main__":
-    from run_catalogo_items import load_dfs_limpios
+    from excel_loader import load_dfs_limpios
 
     dfs = load_dfs_limpios()
     run(dfs)

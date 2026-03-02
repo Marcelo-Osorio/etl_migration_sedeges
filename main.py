@@ -4,11 +4,13 @@ main.py
 Orquestador principal de la migración ETL de SEDEGES.
 
 Ejecuta en orden:
-  1. catalogo_items → output/catalogo_items.sql
-  2. ingresos       → output/ingresos.sql
+  1. catalogo_items   → output/catalogo_items.sql
+  2. ingresos         → output/ingresos.sql
   3. ingreso_detalles → output/ingreso_detalles.sql
                         (+ renames columna producto_id → item_id en DB)
-  4. egresos        → output/egresos.sql
+  4. egresos          → output/egresos.sql
+  5. donaciones       → output/donaciones.sql
+                        (ingresos + ingreso_detalles + egresos para DONACIONES)
 
 Uso:
     python main.py
@@ -19,10 +21,13 @@ import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 
+from excel_loader import load_dfs_limpios
+
 import run_catalogo_items
 import run_egresos
 import run_ingresos
 import run_ingreso_detalles
+import run_donaciones
 
 load_dotenv()
 
@@ -41,8 +46,7 @@ def main():
     print("ETL SEDEGES — Pipeline completa")
     print("=" * 60)
 
-    # Cargar el Excel una sola vez y reutilizarlo
-    dfs_limpios = run_catalogo_items.load_dfs_limpios()
+    dfs_limpios = load_dfs_limpios()
 
     # 1. catalogo_items
     run_catalogo_items.run(dfs_limpios)
@@ -57,12 +61,16 @@ def main():
     # 4. egresos (requiere ingreso_detalles con id > 7 en la DB)
     run_egresos.run(dfs_limpios, engine)
 
+    # 5. donaciones (ingresos + ingreso_detalles + egresos para DONACIONES)
+    run_donaciones.run(dfs_limpios, engine)
+
     print("\n" + "=" * 60)
     print("Pipeline completa. Archivos generados en output/:")
     print("  - catalogo_items.sql")
     print("  - ingresos.sql")
     print("  - ingreso_detalles.sql")
     print("  - egresos.sql")
+    print("  - donaciones.sql")
     print("=" * 60)
 
 
